@@ -24,6 +24,7 @@ app.post('/api/courses', (req, res) => {
   }
   courses.push(course)
   res.send(course)
+  // Use Post Move to Body, Raw, Json
 })
 
 app.get('/api/courses/:id', (req, res) => {
