@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const Joi = require('joi');
 
 app.use(express.json());
 
@@ -17,7 +18,19 @@ app.get('/api/courses', (req, res) => {
   res.send(courses)
 })
 
+app.get('/api/courses/:id', (req, res) => {
+  const course = courses.find(c => c.id === parseInt(req.params.id));
+  if(!course) res.status(404).send("Course not found")
+  res.send(course)
+})
+
 app.post('/api/courses', (req, res) => {
+  if(!req.body.name || req.body.name.length < 3){
+    // Bad request
+    res.status(404).send("Name is required with a minimum of 3 characters")
+    return
+  }
+
   const course = {
     id: courses.length + 1,
     name: req.body.name
@@ -27,11 +40,8 @@ app.post('/api/courses', (req, res) => {
   // Use Post Move to Body, Raw, Json
 })
 
-app.get('/api/courses/:id', (req, res) => {
-  const course = courses.find(c => c.id === parseInt(req.params.id));
-  if(!course) res.status(404).send("Course not found")
-  res.send(course)
-})
+
+
 
 
 const port = process.env.PORT || 3000
