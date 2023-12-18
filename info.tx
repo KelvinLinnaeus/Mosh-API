@@ -1,0 +1,5 @@
+HTTP Methods
+GET : Getting data(Read)
+POST : Creating data(Create)
+PUT : Updating data(Update)
+DELETE
