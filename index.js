@@ -40,6 +40,13 @@ app.post('/api/courses', (req, res) => {
   // Use Post Move to Body, Raw, Json
 })
 
+app.put('/api/course/:id', (req, res) => {
+  const course = courses.find(c => c.id === parseInt(req.params.id))
+  if(!course) res.status(404).send(`Course not found`);
+  course.name = req.body.name
+  res.send(course)
+})
+
 
 
 
